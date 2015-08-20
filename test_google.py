@@ -28,9 +28,9 @@ def teardown_func():
     global driver
     driver.quit()
     sauce_client = SauceClient(username, access_key)
-    has_passed = sys.exc_info() == (None, None, None)
-    sauce_client.jobs.update_job(driver.session_id, passed=has_passed)
-    
+    status = sys.exc_info() == (None, None, None)
+    sauce_client.jobs.update_job(driver.session_id, passed=status)
+
 # Will generate a test for each browser and os configuration
 def test_generator_verify_google():
     for browser in browsers:
