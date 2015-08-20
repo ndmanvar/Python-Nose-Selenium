@@ -18,11 +18,6 @@ browsers = [{
 username = os.environ['SAUCE_USERNAME']
 access_key = os.environ['SAUCE_ACCESS_KEY']
 
-# Will generate a test for each browser and os configuration
-def test_generator_verify_google():
-    for browser in browsers:
-        yield verify_google, browser
-
 def launchBrowser(caps):
     caps['name'] = inspect.stack()[1][3]
     return webdriver.Remote(
@@ -35,6 +30,11 @@ def teardown_func():
     sauce_client = SauceClient(username, access_key)
     has_passed = sys.exc_info() == (None, None, None)
     sauce_client.jobs.update_job(driver.session_id, passed=has_passed)
+    
+# Will generate a test for each browser and os configuration
+def test_generator_verify_google():
+    for browser in browsers:
+        yield verify_google, browser
 
 @with_setup(None, teardown_func)
 def verify_google(browser):
