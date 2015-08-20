@@ -6,7 +6,6 @@
 ```
 
 # Setup
-Use sudo if necessary
 `pip install selenium sauceclient nose==1.1.0  # use sudo if necessary`
 
 # Running tests
